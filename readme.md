@@ -7,7 +7,7 @@ Ni kommer att arbeta både **individuellt**, **i grupp** och **i helklass** för
 ---
 
 ## 📂 Material
-Ni har fått ett program i filen `library.c` som innehåller:
+Ni har fått ett program i filen `main.c` som innehåller:
 - En `struct Book` och en `struct Library`
 - Funktioner för att lägga till, skriva ut, söka, låna och lämna tillbaka böcker
 - Ett menysystem i `main()`
@@ -15,7 +15,7 @@ Ni har fått ett program i filen `library.c` som innehåller:
 ---
 
 ## 👤 Steg 1 – Individuell analys (ca 15 minuter)
-1. Öppna filen `library.c` i valfri editor.
+1. Öppna filen `main.c` i valfri editor.
 2. Läs igenom koden noggrant.
 3. **Kommentera direkt i koden** (eller på papper) alla delar du:
    - Inte förstår alls → skriv t.ex. `// I have no idea what this does`
