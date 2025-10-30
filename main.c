@@ -102,6 +102,33 @@ void return_book(Library *lib, const char *title) {
     }
     printf("Book not found: %s\n", title);
 }
+void remove_book(Library *lib, const char *title){  //krångligt
+
+    
+     for (int i = 0; i < lib->num_books; i++) {
+         //kommentar//funktionen returnerar 0 om parametrarna är lika dvs strängen hittas
+        if (strcasecmp(lib->books[i].title, title) == 0) {  
+            if (lib->books[i].is_borrowed) {
+                printf("'%s' cannot be removed , book is borrowed\n", title);
+                return;
+            } 
+            else{
+                //kommentar// får varning då sizeof kan vara unsigned och kan bli fel då man jämför en int signed och en unsigned variabel. Lösning att ändra int i till size_t  i
+                // for(int x = i; x < (sizeof(lib-> books) / sizeof(lib->books[0]) - 1) ; x++ ){ // size/size hela memory size / en book size = antal element
+                for(size_t x = i; x < (sizeof(lib-> books) / sizeof(lib->books[0]) - 1) ; x++ ){
+                    lib -> books[x] = lib -> books[x + 1];
+                }
+                //kommentar// num_books-- används för att minska num_books-- i arrayen kommer det finnas dubbelt av den sista Book structen , men den vill vi inte använda (är bara skräp) , num_books får då säga hur många böcker vi ska iterera över och används i for looparna i metoderna
+                lib -> num_books--;  
+                return;
+            }
+        }
+        printf("%s", "Boken går inte att hitta!\n");
+    
+    }
+   
+}
+
 
 // ---------------- MAIN PROGRAM ----------------
 int main() {
@@ -122,7 +149,8 @@ int main() {
         printf("2. Search for a book\n");
         printf("3. Borrow a book\n");
         printf("4. Return a book\n");
-        printf("5. Exit\n");
+        printf("5. Remove a book\n");
+        printf("6. Exit\n");
         printf("Choose an option: ");
         scanf("%d", &choice);
         getchar(); // clear newline
@@ -150,13 +178,22 @@ int main() {
                 return_book(&myLibrary, title);
                 break;
             case 5:
+                
+                printf("Enter book title to remove: ");
+                //kommentar// fgets läser hela raden även /n! vilket vi vill få bort
+                fgets(title, sizeof(title), stdin);
+                //kommentar strcspn(title, "\n") returnerar indexet för \n som sätt till 0 dvs tar bort det? 0 är samma sak som '\0' ? 
+                title[strcspn(title, "\n")] = 0; 
+                remove_book(&myLibrary, title);
+                break;
+            case 6:
                 printf("Exiting program. Goodbye!\n");
                 break;
             default:
                 printf("Invalid choice. Try again.\n");
         }
 
-    } while (choice != 5);
+    } while (choice != 6);
 
     return 0;
 }
