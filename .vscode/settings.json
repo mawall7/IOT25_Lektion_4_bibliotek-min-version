@@ -1,0 +1,9 @@
+{
+    "makefile.launchConfigurations": [
+        {
+            "cwd": "c:\\Programmering\\CC++\\IOT25\\Lektion4-bibliotek-structs-lektion4-egen-version",
+            "binaryPath": "c:\\Programmering\\CC++\\IOT25\\Lektion4-bibliotek-structs-lektion4-egen-version\\main.exe",
+            "binaryArgs": []
+        }
+    ]
+}
