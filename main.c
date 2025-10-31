@@ -102,7 +102,7 @@ void return_book(Library *lib, const char *title) {
     }
     printf("Book not found: %s\n", title);
 }
-void remove_book(Library *lib, const char *title){  //krångligt
+void remove_book(Library *lib, const char *title){  //kommentar//obs tänk på att lib är en pekare och användning av sizeof!(https://www.geeksforgeeks.org/cpp/using-sizof-operator-with-array-paratmeters-in-c/) men i det här fallet går det bra att använda om man vill eftersom parametern inte direkt är en array utan en struct och i structen är books inte en pekare!
 
     
      for (int i = 0; i < lib->num_books; i++) {
@@ -115,7 +115,11 @@ void remove_book(Library *lib, const char *title){  //krångligt
             else{
                 //kommentar// får varning då sizeof kan vara unsigned och kan bli fel då man jämför en int signed och en unsigned variabel. Lösning att ändra int i till size_t  i
                 // for(int x = i; x < (sizeof(lib-> books) / sizeof(lib->books[0]) - 1) ; x++ ){ // size/size hela memory size / en book size = antal element
-                for(size_t x = i; x < (sizeof(lib-> books) / sizeof(lib->books[0]) - 1) ; x++ ){
+                // for(size_t x = i; x < (sizeof(lib-> books) / sizeof(lib->books[0]) - 1) ; x++ ){
+                //kommentar // obs använd num_books istället för sizeof(lib -> books)
+                // for(int x = i; x < (sizeof(lib-> books) / sizeof(lib->books[0]) - 1) ; x++ ){ // size/size hela memory size / en book size = antal element
+                   for(int x = i; x < (lib-> num_books - 1) ; x++ ){ // size/size hela memory size / en book size = antal element
+             
                     lib -> books[x] = lib -> books[x + 1];
                 }
                 //kommentar// num_books-- används för att minska num_books-- i arrayen kommer det finnas dubbelt av den sista Book structen , men den vill vi inte använda (är bara skräp) , num_books får då säga hur många böcker vi ska iterera över och används i for looparna i metoderna
